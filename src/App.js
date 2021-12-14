@@ -17,9 +17,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Learn React Hooks</h1>
+        <h1>Counter as a React Component</h1>
         <div className="counter-item">
-          <h2>Counter: {this.state.count}</h2>
+          <h3>Counter: {this.state.count}</h3>
           <button className="m-2" onClick={this.IncrementCounter}>
             Increment
           </button>
