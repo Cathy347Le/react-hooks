@@ -1,2 +1,1 @@
-# react-hooks
-Learn React Hooks
+# Learn React Hooks
