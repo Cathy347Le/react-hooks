@@ -12,6 +12,17 @@ function App() {
     setCounter(counter - 1);
   };
 
+  const fetchRandomData = () => {
+    fetch("https://randomuser.me/api")
+      .then((res) => {
+        console.log(res.json());
+        return res;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div className="App">
       <h1>Learn React Hooks</h1>
@@ -23,6 +34,9 @@ function App() {
         <button className="m-2" onClick={DecrementCounter}>
           Decrement
         </button>
+      </div>
+      <div className="api-data-container mt-5">
+        <button onClick={fetchRandomData}>Get Random User</button>
       </div>
     </div>
   );
