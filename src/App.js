@@ -20,8 +20,12 @@ class App extends Component {
         <h1>Learn React Hooks</h1>
         <div className="counter-item">
           <h2>Counter: {this.state.count}</h2>
-          <button onClick={this.IncrementCounter}>Increment</button>
-          <button onClick={this.DecrementCounter}>Decrement</button>
+          <button className="m-2" onClick={this.IncrementCounter}>
+            Increment
+          </button>
+          <button className="m-2" onClick={this.DecrementCounter}>
+            Decrement
+          </button>
         </div>
       </div>
     );
