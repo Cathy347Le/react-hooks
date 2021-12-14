@@ -1,35 +1,31 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import "./App.css";
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { count: 0 };
-  }
 
-  IncrementCounter = () => {
-    this.setState({ count: this.state.count + 1 });
+function App() {
+  const [counter, setCounter] = useState(0);
+
+  const IncrementCounter = () => {
+    setCounter(counter + 1);
   };
 
-  DecrementCounter = () => {
-    this.setState({ count: this.state.count - 1 });
+  const DecrementCounter = () => {
+    setCounter(counter - 1);
   };
 
-  render() {
-    return (
-      <div className="App">
-        <h1>Learn React Hooks</h1>
-        <div className="counter-item">
-          <h2>Counter: {this.state.count}</h2>
-          <button className="m-2" onClick={this.IncrementCounter}>
-            Increment
-          </button>
-          <button className="m-2" onClick={this.DecrementCounter}>
-            Decrement
-          </button>
-        </div>
+  return (
+    <div className="App">
+      <h1>Learn React Hooks</h1>
+      <div className="counter-item">
+        <h3>Counter: {counter}</h3>
+        <button className="m-2" onClick={IncrementCounter}>
+          Increment
+        </button>
+        <button className="m-2" onClick={DecrementCounter}>
+          Decrement
+        </button>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default App;
