@@ -9,6 +9,14 @@
 
 - Create a counter using useState and get it to Increment and Decrement
 
+#### Connect to an API - use AXIOS
+
+https://www.freecodecamp.org/news/how-to-use-axios-with-react/
+
+- Fetch https://randomuser.me/api and display it on screen
+- Use Axios console.log the data (axios autommatically transforms the JSON data for you)
+- Display the random user on the screen in a readable layout
+
 #### Connect to an API - use FETCH
 
 - Fetch https://randomuser.me/api and display it on screen
