@@ -14,26 +14,45 @@ function App() {
     setCounter(counter - 1);
   };
 
-  const fetchRandomData = () => {
-    return axios
-      .get("https://randomuser.me/api")
-      .then((data) => {
-        //handle success
-        console.log(data);
-        // return JSON.stringify(data);
-        return JSON.stringify(data, null, 2); //can take 3 parameters, value, replacer, and space
-      })
-      .catch((err) => {
-        //handle error
-        console.log(err);
-      });
-  };
+  // AXIOS AND PROMISE
+  // const fetchRandomData = () => {
+  //   return axios
+  //     .get("https://randomuser.me/api")
+  //     .then((data) => {
+  //       //handle success
+  //       console.log(data);
+  //       // return JSON.stringify(data);
+  //       return JSON.stringify(data, null, 2); //can take 3 parameters, value, replacer, and space
+  //     })
+  //     .catch((err) => {
+  //       //handle error
+  //       console.log(err);
+  //     });
+  // };
 
+  // useEffect(() => {
+  //   fetchRandomData().then((randomData) => {
+  //     // setRandomUserData(randomData);
+  //     setRandomUserData(randomData || "No user data found.");
+  //   });
+  // }, []);
+
+  // AXIOS AND ASYNC AWAIT
   useEffect(() => {
-    fetchRandomData().then((randomData) => {
-      // setRandomUserData(randomData);
-      setRandomUserData(randomData || "No user data found.");
-    });
+    const url = "https://randomuser.me/api";
+
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(url);
+        console.log(response);
+        const jsonString = JSON.stringify(response, null, 2);
+        setRandomUserData(jsonString);
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (
