@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 
 function App() {
   const [counter, setCounter] = useState(0);
+  const [randomUserData, setRandomUserData] = useState("");
 
   const IncrementCounter = () => {
     setCounter(counter + 1);
@@ -12,16 +13,44 @@ function App() {
     setCounter(counter - 1);
   };
 
-  const fetchRandomData = () => {
-    fetch("https://randomuser.me/api")
-      .then((res) => {
-        console.log(res.json());
-        return res;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  const getData = () =>
+    fetch("https://randomuser.me/api").then((data) => {
+      let randomDataJSON = data.json();
+      console.log(randomDataJSON);
+      // return JSON.stringify(randomDataJSON);
+    });
+
+  useEffect(() => {
+    getData().then((data) => setRandomUserData(data));
+  }, []);
+
+  // const fetchRandomData = () => {
+  //   fetch("https://randomuser.me/api")
+  //     .then((res) => {
+  //       console.log(res.json());
+  //       res.json();
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
+
+  // useEffect(() => {
+  //   const url = "https://randomuser.me/api";
+
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch(url);
+  //       const json = await response.json();
+  //       console.log(json.results);
+  //       setRandomUserData(json.results);
+  //     } catch (error) {
+  //       console.log("error", error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, [randomUserData]);
 
   return (
     <div className="App">
@@ -36,10 +65,15 @@ function App() {
         </button>
       </div>
       <div className="api-data-container mt-5">
-        <button onClick={fetchRandomData}>Get Random User</button>
+        <p>{randomUserData}</p>
       </div>
     </div>
   );
 }
 
 export default App;
+
+/*<div className="api-data-container mt-5">
+<button onClick={fetchRandomData}>Get Random User</button>
+</div>
+*/
