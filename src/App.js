@@ -13,27 +13,27 @@ function App() {
     setCounter(counter - 1);
   };
 
-  const getData = () =>
-    fetch("https://randomuser.me/api").then((data) => {
-      let randomDataJSON = data.json();
-      console.log(randomDataJSON);
-      // return JSON.stringify(randomDataJSON);
-    });
+  // const getData = () =>
+  //   fetch("https://randomuser.me/api").then((data) => {
+  //     let randomDataJSON = data.json();
+  //     console.log(randomDataJSON);
+  //     // return JSON.stringify(randomDataJSON);
+  //   });
 
-  useEffect(() => {
-    getData().then((data) => setRandomUserData(data));
-  }, []);
+  // useEffect(() => {
+  //   getData().then((data) => setRandomUserData(data));
+  // }, []);
 
-  // const fetchRandomData = () => {
-  //   fetch("https://randomuser.me/api")
-  //     .then((res) => {
-  //       console.log(res.json());
-  //       res.json();
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
+  const fetchRandomData = () => {
+    fetch("https://randomuser.me/api")
+      .then((res) => {
+        console.log(res.json());
+        res.json();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   // useEffect(() => {
   //   const url = "https://randomuser.me/api";
@@ -65,7 +65,7 @@ function App() {
         </button>
       </div>
       <div className="api-data-container mt-5">
-        <p>{randomUserData}</p>
+        <button onClick={fetchRandomData}>Get Random User</button>
       </div>
     </div>
   );
@@ -76,4 +76,5 @@ export default App;
 /*<div className="api-data-container mt-5">
 <button onClick={fetchRandomData}>Get Random User</button>
 </div>
+
 */
