@@ -13,28 +13,24 @@ function App() {
     setCounter(counter - 1);
   };
 
-  // const getData = () =>
-  //   fetch("https://randomuser.me/api").then((data) => {
-  //     let randomDataJSON = data.json();
-  //     console.log(randomDataJSON);
-  //     // return JSON.stringify(randomDataJSON);
-  //   });
-
-  // useEffect(() => {
-  //   getData().then((data) => setRandomUserData(data));
-  // }, []);
-
+  // FETCH AND PROMISE
   const fetchRandomData = () => {
-    fetch("https://randomuser.me/api")
-      .then((res) => {
-        console.log(res.json());
-        res.json();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    return (
+      fetch("https://randomuser.me/api")
+        .then((res) => res.json())
+        // .then((jsonData) => console.log(jsonData)) //Need to use another then to console.log the JSON data
+        .then((jsonStringData) => JSON.stringify(jsonStringData, null, 2))
+    );
   };
 
+  useEffect(() => {
+    fetchRandomData().then((randomData) => {
+      // console.log(randomData);
+      setRandomUserData(randomData || "No user data found.");
+    });
+  }, []);
+
+  // FETCH AND ASYNC AWAIT
   // useEffect(() => {
   //   const url = "https://randomuser.me/api";
 
@@ -42,15 +38,16 @@ function App() {
   //     try {
   //       const response = await fetch(url);
   //       const json = await response.json();
-  //       console.log(json.results);
-  //       setRandomUserData(json.results);
+  //       console.log(json);
+  //       const jsonString = JSON.stringify(json, null, 2);
+  //       setRandomUserData(jsonString);
   //     } catch (error) {
   //       console.log("error", error);
   //     }
   //   };
 
   //   fetchData();
-  // }, [randomUserData]);
+  // }, []);
 
   return (
     <div className="App">
@@ -65,7 +62,7 @@ function App() {
         </button>
       </div>
       <div className="api-data-container mt-5">
-        <button onClick={fetchRandomData}>Get Random User</button>
+        <pre>{randomUserData}</pre>
       </div>
     </div>
   );
