@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
+import Table from "react-bootstrap/Table";
 
 function App() {
   const [counter, setCounter] = useState(0);
@@ -94,7 +95,7 @@ function App() {
             </div>
           ))}
         </div>
-        <table>
+        <Table striped bordered>
           <thead>
             <tr>
               <th>Name</th>
@@ -115,7 +116,7 @@ function App() {
               </tr>
             ))}
           </tbody>
-        </table>
+        </Table>
       </div>
     </div>
   );
