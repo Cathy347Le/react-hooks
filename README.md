@@ -34,6 +34,8 @@ https://www.freecodecamp.org/news/how-to-use-axios-with-react/
     - Update useEffect - render when the nextPageNumber updates
     - Create button to run the getNextUser function
       - getNextUser will append the next user to your screen
+    - Use useEffect
+    - What happens when you reach the end of the page?
 
 #### Connect to an API - use FETCH
 

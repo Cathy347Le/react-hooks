@@ -7,6 +7,7 @@ function App() {
   const [counter, setCounter] = useState(0);
   const [randomUserData, setRandomUserData] = useState("");
   const [userInfoList, setUserInfoList] = useState([]);
+  const [nextPageNumber, setNextPageNumber] = useState(1); //Iniitalize to the first page
 
   const IncrementCounter = () => {
     setCounter(counter + 1);
@@ -17,20 +18,18 @@ function App() {
   };
 
   // AXIOS AND PROMISE
-  const fetchRandomData = () => {
+  const fetchRandomData = (pageNumber) => {
     return (
       axios
-        // .get("https://randomuser.me/api")
-        .get("https://randomuser.me/api?results=3")
+        // .get(`https://randomuser.me/api?results=3?page=${pageNumber}`)
+        .get(`https://randomuser.me/api?page=${pageNumber}&results=3`)
         .then((data) => {
-          //handle success
           console.log(data);
           // console.log(data.data.results);
           // return JSON.stringify(data);
           return data; //can take 3 parameters, value, replacer, and space
         })
         .catch((err) => {
-          //handle error
           console.log(err);
         })
     );
@@ -47,14 +46,24 @@ function App() {
     return `${first} ${last} ${gender} ${age} ${country}`;
   };
 
-  useEffect(() => {
-    fetchRandomData().then((randomData) => {
-      // setRandomUserData(randomData);
-      setRandomUserData(
-        JSON.stringify(randomData, null, 2) || "No user data found."
-      );
-      setUserInfoList(randomData.data.results);
+  const getNextUser = () => {
+    fetchRandomData(nextPageNumber).then((randomData) => {
+      const newUserList = [...userInfoList, ...randomData.data.results];
+      setUserInfoList(newUserList);
+      setNextPageNumber(randomData.data.info.page + 1);
     });
+  };
+
+  useEffect(() => {
+    // fetchRandomData(nextPageNumber).then((randomData) => {
+    //   // setRandomUserData(randomData);
+    //   setRandomUserData(
+    //     JSON.stringify(randomData, null, 2) || "No user data found."
+    //   );
+    //   setUserInfoList(randomData.data.results);
+    //   setNextPageNumber(randomData.data.info.page + 1);
+    // });
+    getNextUser();
   }, []);
 
   // AXIOS AND ASYNC AWAIT
@@ -88,6 +97,9 @@ function App() {
         </button>
         <div className="api-data-container">
           <pre>{randomUserData}</pre>
+          <button className="m-2" onClick={getNextUser}>
+            Add Next Random User
+          </button>
           {userInfoList.map((userInfo, index) => (
             <div className="my-5" key={index}>
               <p>{getUserInfo(userInfo)}</p>
