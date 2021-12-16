@@ -22,7 +22,7 @@ https://www.freecodecamp.org/news/how-to-use-axios-with-react/
   - Update useEffect - setUserInfo
   - Make sure fetchRandomData doesn't return results as a string - display as is (usually an object)
   - Function to capture the random user's info - getUserInfo
-  - Use map array method on results since there will be multiple users
+  - Use map array method on results since there will be multiple users. Learn about importance of keys.
 
 #### Connect to an API - use FETCH
 

@@ -20,7 +20,7 @@ function App() {
     return (
       axios
         // .get("https://randomuser.me/api")
-        .get("https://randomuser.me/api?results=5")
+        .get("https://randomuser.me/api?results=2")
         .then((data) => {
           //handle success
           console.log(data);
@@ -86,8 +86,8 @@ function App() {
         </button>
         <div className="api-data-container">
           <pre>{randomUserData}</pre>
-          {userInfo.map((userInfo, idx) => (
-            <div className="my-5" key={idx.phone}>
+          {userInfo.map((userInfo, index) => (
+            <div className="my-5" key={index}>
               <p>{getUserName(userInfo)}</p>
               <img src={userInfo.picture.thumbnail} alt="thumbnail-profile" />
             </div>
