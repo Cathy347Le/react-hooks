@@ -6,7 +6,7 @@ import Table from "react-bootstrap/Table";
 function App() {
   const [counter, setCounter] = useState(0);
   const [randomUserData, setRandomUserData] = useState("");
-  const [userInfo, setUserInfo] = useState([]);
+  const [userInfoList, setUserInfoList] = useState([]);
 
   const IncrementCounter = () => {
     setCounter(counter + 1);
@@ -24,7 +24,7 @@ function App() {
         .get("https://randomuser.me/api?results=3")
         .then((data) => {
           //handle success
-          // console.log(data);
+          console.log(data);
           // console.log(data.data.results);
           // return JSON.stringify(data);
           return data; //can take 3 parameters, value, replacer, and space
@@ -36,7 +36,7 @@ function App() {
     );
   };
 
-  const getUserName = (userInfo) => {
+  const getUserInfo = (userInfo) => {
     const {
       name: { first, last },
       location: { country },
@@ -53,7 +53,7 @@ function App() {
       setRandomUserData(
         JSON.stringify(randomData, null, 2) || "No user data found."
       );
-      setUserInfo(randomData.data.results);
+      setUserInfoList(randomData.data.results);
     });
   }, []);
 
@@ -88,9 +88,9 @@ function App() {
         </button>
         <div className="api-data-container">
           <pre>{randomUserData}</pre>
-          {userInfo.map((userInfo, index) => (
+          {userInfoList.map((userInfo, index) => (
             <div className="my-5" key={index}>
-              <p>{getUserName(userInfo)}</p>
+              <p>{getUserInfo(userInfo)}</p>
               <img src={userInfo.picture.thumbnail} alt="thumbnail-profile" />
             </div>
           ))}
@@ -105,8 +105,8 @@ function App() {
             </tr>
           </thead>
           <tbody>
-            {userInfo.map((userInfo) => (
-              <tr>
+            {userInfoList.map((userInfo, index) => (
+              <tr key={index}>
                 <td>
                   {userInfo.name.first} {userInfo.name.last}
                 </td>
@@ -124,14 +124,20 @@ function App() {
 
 export default App;
 
+//Button to fetch the data
 /*<button className="mt-5" onClick={fetchRandomData}>
 Fetch Random user
 </button>
 */
 
-// {userInfo.map((userInfo, index) => (
-//   <div className="my-5" key={index}>
-//     <p>{getUserName(userInfo)}</p>
-//     <img src={userInfo.picture.thumbnail} alt="thumbnail-profile" />
-//   </div>
+//Manual way to writing a table
+// {userInfoList.map((userInfo) => (
+//   <tr>
+//     <td>
+//       {userInfo.name.first} {userInfo.name.last}
+//     </td>
+//     <td>{userInfo.gender}</td>
+//     <td>{userInfo.dob.age}</td>
+//     <td>{userInfo.location.country}</td>
+//   </tr>
 // ))}
