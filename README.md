@@ -27,7 +27,13 @@ https://www.freecodecamp.org/news/how-to-use-axios-with-react/
     - Get basic table setup done. Use map method to setup the rows
     - Install React bootstrap to style the table npm install react-bootstrap bootstrap@5.1.3
     - NOTE: Need to figure out a cleaner way to do React Tables
-  - Work on Pagination
+  - Work on Pagination - button appends the next user
+    - update the API call url to include page parameter
+    - fetchRandomData should include the page parameter
+    - Create a State to record the nextPageNumber
+    - Update useEffect - render when the nextPageNumber updates
+    - Create button to run the getNextUser function
+      - getNextUser will append the next user to your screen
 
 #### Connect to an API - use FETCH
 
