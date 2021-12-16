@@ -26,6 +26,8 @@ https://www.freecodecamp.org/news/how-to-use-axios-with-react/
   - Display data in a Table - React Tables
     - Get basic table setup done. Use map method to setup the rows
     - Install React bootstrap to style the table npm install react-bootstrap bootstrap@5.1.3
+    - NOTE: Need to figure out a cleaner way to do React Tables
+  - Work on Pagination
 
 #### Connect to an API - use FETCH
 
