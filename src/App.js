@@ -20,10 +20,10 @@ function App() {
     return (
       axios
         // .get("https://randomuser.me/api")
-        .get("https://randomuser.me/api?results=2")
+        .get("https://randomuser.me/api?results=3")
         .then((data) => {
           //handle success
-          console.log(data);
+          // console.log(data);
           // console.log(data.data.results);
           // return JSON.stringify(data);
           return data; //can take 3 parameters, value, replacer, and space
@@ -42,6 +42,7 @@ function App() {
       dob: { age },
       gender,
     } = userInfo;
+    // console.log(userInfo);
     return `${first} ${last} ${gender} ${age} ${country}`;
   };
 
@@ -93,6 +94,28 @@ function App() {
             </div>
           ))}
         </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Gender</th>
+              <th>Age</th>
+              <th>Country</th>
+            </tr>
+          </thead>
+          <tbody>
+            {userInfo.map((userInfo) => (
+              <tr>
+                <td>
+                  {userInfo.name.first} {userInfo.name.last}
+                </td>
+                <td>{userInfo.gender}</td>
+                <td>{userInfo.dob.age}</td>
+                <td>{userInfo.location.country}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
@@ -104,3 +127,10 @@ export default App;
 Fetch Random user
 </button>
 */
+
+// {userInfo.map((userInfo, index) => (
+//   <div className="my-5" key={index}>
+//     <p>{getUserName(userInfo)}</p>
+//     <img src={userInfo.picture.thumbnail} alt="thumbnail-profile" />
+//   </div>
+// ))}
