@@ -16,6 +16,11 @@ https://www.freecodecamp.org/news/how-to-use-axios-with-react/
 - Fetch https://randomuser.me/api and display it on screen
 - Use Axios console.log the data (axios autommatically transforms the JSON data for you)
 - Display the random user on the screen using both ASYNC AWAIT AND PROMISE
+- Display data and image (first, last, age, country, image)
+  - store random user results in useState, set as empty array since there will be multiple random users
+  - make sure fetchRandomData doesn't return results as a string - you want object
+  - use map array method since there will be multiple users
+  - function to capture the random user's info
 
 #### Connect to an API - use FETCH
 

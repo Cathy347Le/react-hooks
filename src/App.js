@@ -5,6 +5,7 @@ import "./App.css";
 function App() {
   const [counter, setCounter] = useState(0);
   const [randomUserData, setRandomUserData] = useState("");
+  const [userInfo, setUserInfo] = useState([]);
 
   const IncrementCounter = () => {
     setCounter(counter + 1);
@@ -15,45 +16,45 @@ function App() {
   };
 
   // AXIOS AND PROMISE
-  // const fetchRandomData = () => {
-  //   return axios
-  //     .get("https://randomuser.me/api")
-  //     .then((data) => {
-  //       //handle success
-  //       console.log(data);
-  //       // return JSON.stringify(data);
-  //       return JSON.stringify(data, null, 2); //can take 3 parameters, value, replacer, and space
-  //     })
-  //     .catch((err) => {
-  //       //handle error
-  //       console.log(err);
-  //     });
-  // };
+  const fetchRandomData = () => {
+    return axios
+      .get("https://randomuser.me/api")
+      .then((data) => {
+        //handle success
+        console.log(data);
+        // return JSON.stringify(data);
+        return JSON.stringify(data, null, 2); //can take 3 parameters, value, replacer, and space
+      })
+      .catch((err) => {
+        //handle error
+        console.log(err);
+      });
+  };
 
-  // useEffect(() => {
-  //   fetchRandomData().then((randomData) => {
-  //     // setRandomUserData(randomData);
-  //     setRandomUserData(randomData || "No user data found.");
-  //   });
-  // }, []);
+  useEffect(() => {
+    fetchRandomData().then((randomData) => {
+      // setRandomUserData(randomData);
+      setRandomUserData(randomData || "No user data found.");
+    });
+  }, []);
 
   // AXIOS AND ASYNC AWAIT
-  useEffect(() => {
-    const url = "https://randomuser.me/api";
+  // useEffect(() => {
+  //   const url = "https://randomuser.me/api";
 
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(url);
-        console.log(response);
-        const jsonString = JSON.stringify(response, null, 2);
-        setRandomUserData(jsonString);
-      } catch (error) {
-        console.log("error", error);
-      }
-    };
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(url);
+  //       console.log(response);
+  //       const jsonString = JSON.stringify(response, null, 2);
+  //       setRandomUserData(jsonString);
+  //     } catch (error) {
+  //       console.log("error", error);
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   return (
     <div className="App">
