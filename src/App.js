@@ -17,24 +17,41 @@ function App() {
 
   // AXIOS AND PROMISE
   const fetchRandomData = () => {
-    return axios
-      .get("https://randomuser.me/api")
-      .then((data) => {
-        //handle success
-        console.log(data);
-        // return JSON.stringify(data);
-        return JSON.stringify(data, null, 2); //can take 3 parameters, value, replacer, and space
-      })
-      .catch((err) => {
-        //handle error
-        console.log(err);
-      });
+    return (
+      axios
+        // .get("https://randomuser.me/api")
+        .get("https://randomuser.me/api?results=5")
+        .then((data) => {
+          //handle success
+          console.log(data);
+          // console.log(data.data.results);
+          // return JSON.stringify(data);
+          return data; //can take 3 parameters, value, replacer, and space
+        })
+        .catch((err) => {
+          //handle error
+          console.log(err);
+        })
+    );
+  };
+
+  const getUserName = (userInfo) => {
+    const {
+      name: { first, last },
+      location: { country },
+      dob: { age },
+      gender,
+    } = userInfo;
+    return `${first} ${last} ${gender} ${age} ${country}`;
   };
 
   useEffect(() => {
     fetchRandomData().then((randomData) => {
       // setRandomUserData(randomData);
-      setRandomUserData(randomData || "No user data found.");
+      setRandomUserData(
+        JSON.stringify(randomData, null, 2) || "No user data found."
+      );
+      setUserInfo(randomData.data.results);
     });
   }, []);
 
@@ -69,6 +86,12 @@ function App() {
         </button>
         <div className="api-data-container">
           <pre>{randomUserData}</pre>
+          {userInfo.map((userInfo, idx) => (
+            <div className="my-5" key={idx.phone}>
+              <p>{getUserName(userInfo)}</p>
+              <img src={userInfo.picture.thumbnail} alt="thumbnail-profile" />
+            </div>
+          ))}
         </div>
       </div>
     </div>
