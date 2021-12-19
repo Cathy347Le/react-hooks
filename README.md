@@ -36,6 +36,7 @@ https://www.freecodecamp.org/news/how-to-use-axios-with-react/
       - getNextUser will append the next user to your screen
     - Use useEffect
     - What happens when you reach the end of the page?
+  - Add a Previous Page Button
 
 #### Connect to an API - use FETCH
 
