@@ -37,6 +37,7 @@ https://www.freecodecamp.org/news/how-to-use-axios-with-react/
     - Use useEffect
     - What happens when you reach the end of the page?
   - Add a Previous Page Button
+    - When on Page 1, disable Prev Page
 
 #### Connect to an API - use FETCH
 

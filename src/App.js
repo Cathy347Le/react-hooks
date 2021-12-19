@@ -8,6 +8,7 @@ function App() {
   const [randomUserData, setRandomUserData] = useState("");
   const [userInfoList, setUserInfoList] = useState([]);
   const [pageNumber, setPageNumber] = useState(1); //initialize to the first page
+  const [disableButton, setDisableButton] = useState(true);
 
   const IncrementCounter = () => {
     setCounter(counter + 1);
@@ -74,6 +75,7 @@ function App() {
       setUserInfoList(randomData.data.results);
       console.log(randomData.data.info.page);
       // setNextPageNumber(randomData.data.info.page + 1);
+      pageNumber > 1 ? setDisableButton(false) : setDisableButton(true);
     });
   }, [pageNumber]);
 
@@ -108,10 +110,19 @@ function App() {
         </button>
         <div className="api-data-container">
           <pre>{randomUserData}</pre>
-          <button className="m-2" onClick={() => setPageNumber(pageNumber + 1)}>
+          <button
+            className="m-2"
+            onClick={() => {
+              setPageNumber(pageNumber + 1);
+            }}
+          >
             Next Page
           </button>
-          <button className="m-2" onClick={() => setPageNumber(pageNumber - 1)}>
+          <button
+            disabled={disableButton}
+            className="m-2"
+            onClick={() => setPageNumber(pageNumber - 1)}
+          >
             Prev Page
           </button>
           {userInfoList.map((userInfo, index) => (
