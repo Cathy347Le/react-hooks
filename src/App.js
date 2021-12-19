@@ -7,7 +7,7 @@ function App() {
   const [counter, setCounter] = useState(0);
   const [randomUserData, setRandomUserData] = useState("");
   const [userInfoList, setUserInfoList] = useState([]);
-  const [nextPageNumber, setNextPageNumber] = useState(1); //Iniitalize to the first page
+  const [nextPageNumber, setNextPageNumber] = useState(1); //initialize to the first page
 
   const IncrementCounter = () => {
     setCounter(counter + 1);
