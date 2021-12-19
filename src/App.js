@@ -48,22 +48,13 @@ function App() {
 
   const getNextUser = () => {
     fetchRandomData(nextPageNumber).then((randomData) => {
-      // const newUserList = [...userInfoList, ...randomData.data.results];
-      setUserInfoList(randomData.data.results);
+      const newUserList = [...userInfoList, ...randomData.data.results];
+      setUserInfoList(newUserList);
       setNextPageNumber(randomData.data.info.page + 1);
     });
   };
 
-  const getPrevUser = () => {
-    fetchRandomData(nextPageNumber).then((randomData) => {
-      // const newUserList = [...userInfoList, ...randomData.data.results];
-      setUserInfoList(randomData.data.results);
-      setNextPageNumber(randomData.data.info.page - 1);
-    });
-  };
-
   useEffect(() => {
-    console.log("hello");
     // fetchRandomData(nextPageNumber).then((randomData) => {
     //   // setRandomUserData(randomData);
     //   setRandomUserData(
@@ -72,9 +63,9 @@ function App() {
     //   setUserInfoList(randomData.data.results);
     //   setNextPageNumber(randomData.data.info.page + 1);
     // });
-    // getNextUser();
+    getNextUser();
     // getPrevUser();
-  }, [nextPageNumber]);
+  }, []);
 
   // AXIOS AND ASYNC AWAIT
   // useEffect(() => {
@@ -108,10 +99,7 @@ function App() {
         <div className="api-data-container">
           <pre>{randomUserData}</pre>
           <button className="m-2" onClick={getNextUser}>
-            Next Page
-          </button>
-          <button className="m-2" onClick={getPrevUser}>
-            Previous Page
+            Fetch New Users
           </button>
           {userInfoList.map((userInfo, index) => (
             <div className="my-5" key={index}>
