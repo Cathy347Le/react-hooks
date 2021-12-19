@@ -22,7 +22,7 @@ function App() {
     return (
       axios
         // .get(`https://randomuser.me/api?results=3?page=${pageNumber}`)
-        .get(`https://randomuser.me/api?page=${pageNumber}&results=3`)
+        .get(`https://randomuser.me/api?page=${pageNumber}&results=3&seed=abc`)
         .then((data) => {
           console.log(data);
           // console.log(data.data.results);
@@ -48,13 +48,22 @@ function App() {
 
   const getNextUser = () => {
     fetchRandomData(nextPageNumber).then((randomData) => {
-      const newUserList = [...userInfoList, ...randomData.data.results];
-      setUserInfoList(newUserList);
+      // const newUserList = [...userInfoList, ...randomData.data.results];
+      setUserInfoList(randomData.data.results);
       setNextPageNumber(randomData.data.info.page + 1);
     });
   };
 
+  const getPrevUser = () => {
+    fetchRandomData(nextPageNumber).then((randomData) => {
+      // const newUserList = [...userInfoList, ...randomData.data.results];
+      setUserInfoList(randomData.data.results);
+      setNextPageNumber(randomData.data.info.page - 1);
+    });
+  };
+
   useEffect(() => {
+    console.log("hello");
     // fetchRandomData(nextPageNumber).then((randomData) => {
     //   // setRandomUserData(randomData);
     //   setRandomUserData(
@@ -63,8 +72,9 @@ function App() {
     //   setUserInfoList(randomData.data.results);
     //   setNextPageNumber(randomData.data.info.page + 1);
     // });
-    getNextUser();
-  }, []);
+    // getNextUser();
+    // getPrevUser();
+  }, [nextPageNumber]);
 
   // AXIOS AND ASYNC AWAIT
   // useEffect(() => {
@@ -98,7 +108,10 @@ function App() {
         <div className="api-data-container">
           <pre>{randomUserData}</pre>
           <button className="m-2" onClick={getNextUser}>
-            Add Next Random User
+            Next Page
+          </button>
+          <button className="m-2" onClick={getPrevUser}>
+            Previous Page
           </button>
           {userInfoList.map((userInfo, index) => (
             <div className="my-5" key={index}>
